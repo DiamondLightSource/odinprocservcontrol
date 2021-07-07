@@ -6,13 +6,11 @@ verify_ssl = true
 [dev-packages]
 # Pinning black stops us having to allow pre-releases globally
 black = "==19.10b0"
-
 # Pins to make lockfile usable on multiple Python versions and platforms
 mypy = "*"
 atomicwrites = "*"
 typing-extensions = "*"
 importlib-metadata = "*"
-
 # Test and docs dependencies
 pytest-cov = "*"
 pytest-mypy = "*"
@@ -25,6 +23,9 @@ sphinx-rtd-theme = "*"
 [packages]
 # All other package requirements from setup.cfg
 odinprocserv = {editable = true,path = "."}
+softioc = "*"
+cothread = "*"
+pyyaml = "*"
 
 [scripts]
 tests = "python -m pytest"

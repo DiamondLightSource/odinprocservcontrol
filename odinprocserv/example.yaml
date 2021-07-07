@@ -1,0 +1,10 @@
+#!/scratch/mef65357/pipenv/odinprocserv-w9fBCsal/bin/odinprocserv
+
+ioc_name: BLXXY-CS-IOC-01
+prefix: BLXXY-CS-ODN-01
+process_prefix: BLXXY-EA-ODN
+process_count: 11
+server_process_name: BLXXY-EA-ODN-01
+server_delay: 3
+adodin_ioc_name: BLXXY-EA-IOC-01
+ioc_delay: 5

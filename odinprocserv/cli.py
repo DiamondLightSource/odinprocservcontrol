@@ -1,15 +1,76 @@
+import os
 from argparse import ArgumentParser
 
-from . import __version__
-from .hello import HelloClass, say_hello_lots
+import yaml
+from softioc import builder, softioc
+
+from odinprocserv import OdinProcServConfig, OdinProcServControl
 
 __all__ = ["main"]
 
 
-def main(args=None):
+def parse_args():
     parser = ArgumentParser()
-    parser.add_argument("--version", action="version", version=__version__)
-    parser.add_argument("name", help="Name of the person to greet")
-    parser.add_argument("--times", type=int, default=5, help="Number of times to greet")
-    args = parser.parse_args(args)
-    say_hello_lots(HelloClass(args.name), args.times)
+    parser.add_argument(
+        "config",
+        type=str,
+        help="Config file specifying arguments - overrides any passed directly"
+    )
+
+    parser.add_argument(
+        "--ioc-name", type=str, help="IOC Name - e.g. BLXXY-CS-IOC-01"
+    )
+    parser.add_argument(
+        "--prefix", type=str, help="Prefix for PVs - e.g. BLXXY-CS-ODN-01"
+    )
+    parser.add_argument(
+        "--process-prefix", type=int, help="Prefix of Odin processes"
+    )
+    parser.add_argument(
+        "--process-count", type=int, help="Total number of odin processes"
+    )
+    parser.add_argument(
+        "--server-process-name",
+        type=str,
+        help="Name of odin server process - e.g. BLXXY-EA-ODN-11",
+    )
+    parser.add_argument(
+        "--server-delay", type=int, default=3, help="Delay before starting server"
+    )
+    parser.add_argument(
+        "--adodin-ioc-name", type=str, help="Name of ADOdin IOC - e.g. BLXXY-EA-IOC-03"
+    )
+    parser.add_argument(
+        "--ioc-delay", type=int, default=3, help="Delay before starting IOC"
+    )
+
+    args = parser.parse_args()
+    if args.config:
+        with open(args.config) as config_file:
+            config_text = config_file.read()
+        config = yaml.load(config_text, Loader=yaml.FullLoader)
+        args.__dict__.update(config)
+
+    return args
+
+
+def main():
+    args = parse_args()
+    softioc.devIocStats(args.ioc_name)
+    builder.SetDeviceName(args.prefix)
+    builder.stringIn("WHOAMI", initial_value="Odin procServControl")
+    builder.stringIn("HOSTNAME", VAL=os.uname()[1])
+
+    config = OdinProcServConfig(
+        prefix=args.process_prefix,
+        process_count=args.process_count,
+        server_process_name=args.server_process_name,
+        server_delay=args.server_delay,
+        ioc_name=args.adodin_ioc_name,
+        ioc_delay=args.ioc_delay,
+    )
+    odin_proc_serv_control = OdinProcServControl(config, builder)
+
+    builder.LoadDatabase()
+    softioc.iocInit()
+    softioc.interactive_ioc(globals())
