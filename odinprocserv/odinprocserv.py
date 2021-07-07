@@ -1,7 +1,7 @@
+import asyncio
 from typing import List
 
-from cothread import Sleep
-from cothread.catools import caput
+from aioca import caput
 
 START_DELAY = 3
 
@@ -41,13 +41,13 @@ class OdinProcServControl:
         stop = builder.longOut("STOP", on_update=self.stop)
         restart = builder.longOut("RESTART", on_update=self.restart)
 
-    def start(self) -> None:
+    async def start(self) -> None:
         self._press_buttons(self.config.process_names, "START")
 
-        Sleep(self.config.server_delay)
+        await asyncio.sleep(self.config.server_delay)
         self._press_buttons([self.config.server_process_name], "START")
 
-        Sleep(self.config.ioc_delay)
+        await asyncio.sleep(self.config.ioc_delay)
         self._press_buttons([self.config.ioc_name], "START")
 
     def stop(self) -> None:
@@ -57,9 +57,9 @@ class OdinProcServControl:
             "STOP",
         )
 
-    def restart(self) -> None:
+    async def restart(self) -> None:
         self.stop()
-        Sleep(START_DELAY)
+        await asyncio.sleep(START_DELAY)
         self.start()
 
     @staticmethod

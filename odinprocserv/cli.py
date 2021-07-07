@@ -1,8 +1,8 @@
 import os
 from argparse import ArgumentParser
-
 import yaml
-from softioc import builder, softioc
+
+from softioc import builder, softioc, asyncio_dispatcher
 
 from odinprocserv import OdinProcServConfig, OdinProcServControl
 
@@ -56,6 +56,9 @@ def parse_args():
 
 def main():
     args = parse_args()
+
+    dispatcher = asyncio_dispatcher.AsyncioDispatcher()
+
     softioc.devIocStats(args.ioc_name)
     builder.SetDeviceName(args.prefix)
     builder.stringIn("WHOAMI", initial_value="Odin procServControl")
@@ -72,5 +75,5 @@ def main():
     odin_proc_serv_control = OdinProcServControl(config, builder)
 
     builder.LoadDatabase()
-    softioc.iocInit()
+    softioc.iocInit(dispatcher)
     softioc.interactive_ioc(globals())
