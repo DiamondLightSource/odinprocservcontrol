@@ -1,8 +1,9 @@
+import logging
 import os
 from argparse import ArgumentParser
-import yaml
 
-from softioc import builder, softioc, asyncio_dispatcher
+import yaml
+from softioc import asyncio_dispatcher, builder, softioc
 
 from odinprocserv import OdinProcServConfig, OdinProcServControl
 
@@ -14,18 +15,14 @@ def parse_args():
     parser.add_argument(
         "config",
         type=str,
-        help="Config file specifying arguments - overrides any passed directly"
+        help="Config file specifying arguments - overrides any passed directly",
     )
 
-    parser.add_argument(
-        "--ioc-name", type=str, help="IOC Name - e.g. BLXXY-CS-IOC-01"
-    )
+    parser.add_argument("--ioc-name", type=str, help="IOC Name - e.g. BLXXY-CS-IOC-01")
     parser.add_argument(
         "--prefix", type=str, help="Prefix for PVs - e.g. BLXXY-CS-ODN-01"
     )
-    parser.add_argument(
-        "--process-prefix", type=int, help="Prefix of Odin processes"
-    )
+    parser.add_argument("--process-prefix", type=int, help="Prefix of Odin processes")
     parser.add_argument(
         "--process-count", type=int, help="Total number of odin processes"
     )
@@ -44,6 +41,8 @@ def parse_args():
         "--ioc-delay", type=int, default=3, help="Delay before starting IOC"
     )
 
+    parser.add_argument("--log-level", type=str, default="INFO", help="Log level")
+
     args = parser.parse_args()
     if args.config:
         with open(args.config) as config_file:
@@ -55,9 +54,11 @@ def parse_args():
 
 
 def main():
-    args = parse_args()
+    logging.basicConfig(
+        format="[%(levelname)1.1s %(asctime)s %(module)s:%(lineno)d] %(message)s",
+    )
 
-    dispatcher = asyncio_dispatcher.AsyncioDispatcher()
+    args = parse_args()
 
     softioc.devIocStats(args.ioc_name)
     builder.SetDeviceName(args.prefix)
@@ -72,8 +73,9 @@ def main():
         ioc_name=args.adodin_ioc_name,
         ioc_delay=args.ioc_delay,
     )
-    odin_proc_serv_control = OdinProcServControl(config, builder)
+    odin_proc_serv_control = OdinProcServControl(config, builder, args.log_level)
 
+    dispatcher = asyncio_dispatcher.AsyncioDispatcher()
     builder.LoadDatabase()
     softioc.iocInit(dispatcher)
     softioc.interactive_ioc(globals())

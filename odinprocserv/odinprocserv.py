@@ -1,4 +1,5 @@
 import asyncio
+import logging
 from typing import List
 
 from aioca import caput
@@ -23,17 +24,24 @@ class OdinProcServConfig:
         self.ioc_name = ioc_name
         self.ioc_delay = ioc_delay
 
+    def __repr__(self) -> str:
+        return "{}({})".format(self.__class__.__name__, self.__dict__)
+
 
 class OdinProcServControl:
-    def __init__(self, config: OdinProcServConfig, builder) -> None:
+    def __init__(self, config: OdinProcServConfig, builder, log_level: str) -> None:
+        self._logger = logging.getLogger(self.__class__.__name__)
+        self._logger.setLevel(log_level)
+
         self.config = config
-        print(builder.__name__, builder.__class__.__name__, type(builder).__name__)
+        self._logger.debug("Config: %s", self.config)
 
         processes = range(1, config.process_count + 1)
         self.process_names = [
             self._format_process_name(config.prefix, number) for number in processes
         ]
-        # Remove server so we control it separately
+        self._logger.debug("Processes: %s", ", ".join(self.process_names))
+        # Remove server so we can control it separately
         self.process_names.remove(config.server_process_name)
 
         # Records
