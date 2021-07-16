@@ -62,7 +62,7 @@ def main():
 
     softioc.devIocStats(args.ioc_name)
     builder.SetDeviceName(args.prefix)
-    builder.stringIn("WHOAMI", initial_value="Odin procServControl")
+    builder.stringIn("WHOAMI", initial_value="OdinProcServControl")
     builder.stringIn("HOSTNAME", VAL=os.uname()[1])
 
     config = OdinProcServConfig(
@@ -73,7 +73,7 @@ def main():
         ioc_name=args.adodin_ioc_name,
         ioc_delay=args.ioc_delay,
     )
-    odin_proc_serv_control = OdinProcServControl(config, builder, args.log_level)
+    odin_proc_serv_control = OdinProcServControl(config, args.log_level)
 
     dispatcher = asyncio_dispatcher.AsyncioDispatcher()
     builder.LoadDatabase()
