@@ -40,9 +40,14 @@ class OdinProcServControl:
         self.process_names = [
             self._format_process_name(config.prefix, number) for number in processes
         ]
-        self._logger.debug("Processes: %s", ", ".join(self.process_names))
         # Remove server so we can control it separately
         self.process_names.remove(config.server_process_name)
+        self._logger.debug(
+            "OdinProcServ Targets:\nProcesses: %s\nServer: %s\nIOC: %s",
+            ", ".join(self.process_names),
+            self.config.server_process_name,
+            self.config.ioc_name,
+        )
 
         # Records
         self.start = builder.longOut("START", on_update=self.start)
@@ -67,6 +72,8 @@ class OdinProcServControl:
         await self._press_buttons([self.config.ioc_name], "START")
         self._logger.info("Started ADOdin IOC")
 
+        self._logger.debug("Restart complete")
+
     async def stop(self, value) -> None:
         if value:
             await self._stop()
@@ -80,6 +87,8 @@ class OdinProcServControl:
             "STOP",
         )
 
+        self._logger.debug("Stop complete")
+
     async def restart(self, value) -> None:
         if value:
             await self._restart()
@@ -91,12 +100,13 @@ class OdinProcServControl:
         await asyncio.sleep(START_DELAY)
         await self._start()
 
-    async def _press_buttons(self, button_prefixes: List[str], button_suffix: str) -> None:
+        self._logger.debug("Start complete")
+
+    async def _press_buttons(self, button_prefixes: list[str], button_suffix: str) -> None:
         buttons = ["{}:{}".format(name, button_suffix) for name in button_prefixes]
-        self._logger.info("Pressing buttons: %s", buttons[0])
-        self._logger.info("caput(%s, 1)", buttons)
+        self._logger.debug("caput(%s, 1)", buttons)
         await caput(buttons, 1)
-        self._logger.info("Caput complete")
+        self._logger.debug("Caput complete")
 
     @staticmethod
     def _format_process_name(prefix: str, process_number: int) -> str:
