@@ -45,35 +45,58 @@ class OdinProcServControl:
         self.process_names.remove(config.server_process_name)
 
         # Records
-        start = builder.longOut("START", on_update=self.start)
-        stop = builder.longOut("STOP", on_update=self.stop)
-        restart = builder.longOut("RESTART", on_update=self.restart)
+        self.start = builder.longOut("START", on_update=self.start)
+        self.stop = builder.longOut("STOP", on_update=self.stop)
+        self.restart = builder.longOut("RESTART", on_update=self.restart)
 
-    async def start(self) -> None:
-        self._press_buttons(self.config.process_names, "START")
+    async def start(self, value) -> None:
+        if value:
+            await self._start()
+            self.start.set(0)
+
+    async def _start(self) -> None:
+        self._logger.info("Start called")
+        await self._press_buttons(self.process_names, "START")
+        self._logger.info("Started processes")
 
         await asyncio.sleep(self.config.server_delay)
-        self._press_buttons([self.config.server_process_name], "START")
+        await self._press_buttons([self.config.server_process_name], "START")
+        self._logger.info("Started Odin Server")
 
         await asyncio.sleep(self.config.ioc_delay)
-        self._press_buttons([self.config.ioc_name], "START")
+        await self._press_buttons([self.config.ioc_name], "START")
+        self._logger.info("Started ADOdin IOC")
 
-    def stop(self) -> None:
-        self._press_buttons(
-            self.config.process_names
+    async def stop(self, value) -> None:
+        if value:
+            await self._stop()
+            self.stop.set(0)
+
+    async def _stop(self):
+        self._logger.info("Stop called")
+        await self._press_buttons(
+            self.process_names
             + [self.config.server_process_name, self.config.ioc_name],
             "STOP",
         )
 
-    async def restart(self) -> None:
-        self.stop()
-        await asyncio.sleep(START_DELAY)
-        self.start()
+    async def restart(self, value) -> None:
+        if value:
+            await self._restart()
+            self.restart.set(0)
 
-    @staticmethod
-    def _press_buttons(button_prefixes: List[str], button_suffix: str) -> None:
+    async def _restart(self) -> None:
+        self._logger.info("Restart called")
+        await self._stop()
+        await asyncio.sleep(START_DELAY)
+        await self._start()
+
+    async def _press_buttons(self, button_prefixes: List[str], button_suffix: str) -> None:
         buttons = ["{}:{}".format(name, button_suffix) for name in button_prefixes]
-        caput(buttons, 1)
+        self._logger.info("Pressing buttons: %s", buttons[0])
+        self._logger.info("caput(%s, 1)", buttons)
+        await caput(buttons, 1)
+        self._logger.info("Caput complete")
 
     @staticmethod
     def _format_process_name(prefix: str, process_number: int) -> str:

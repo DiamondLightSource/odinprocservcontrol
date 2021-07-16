@@ -25,7 +25,7 @@ sphinx-rtd-theme = "*"
 odinprocserv = {editable = true,path = "."}
 softioc = "*"
 pyyaml = "*"
-aioca = "*"
+aioca = "==1.2"
 
 [scripts]
 tests = "python -m pytest"
