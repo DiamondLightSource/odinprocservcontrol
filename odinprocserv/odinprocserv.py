@@ -65,7 +65,7 @@ class OdinProcServControl:
         self.restart = builder.longOut("RESTART", on_update=self.restart_processes)
 
     async def start_processes(self, value: int) -> None:
-        """If button pressed, call `_start` and then release the button"""
+        """If button pressed, call _start and then release the button"""
         if value:
             await self._start_processes()
             self.start.set(0)
@@ -96,7 +96,7 @@ class OdinProcServControl:
         self._logger.debug("Restart complete")
 
     async def stop_processes(self, value: int) -> None:
-        """If button pressed, call `_stop` and then release the button"""
+        """If button pressed, call _stop and then release the button"""
         if value:
             await self._stop_processes()
             self.stop.set(0)
@@ -113,7 +113,7 @@ class OdinProcServControl:
         self._logger.debug("Stop complete")
 
     async def restart_processes(self, value: int) -> None:
-        """If button pressed, call `_restart` and then release the button"""
+        """If button pressed, call _restart and then release the button"""
         if value:
             await self._restart_processes()
             self.restart.set(0)

@@ -19,8 +19,8 @@ using ``autoclass`` and ``autofunction`` directives instead of
 
     Version number as calculated by https://github.com/dls-controls/versiongit
 
-.. automodule:: odinprocserv.hello
+.. automodule:: odinprocserv.odinprocserv
     :members:
 
-    ``odinprocserv.hello``
+    ``odinprocserv.odinprocserv``
     -----------------------------------------
