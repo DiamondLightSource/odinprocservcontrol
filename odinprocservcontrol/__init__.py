@@ -1,4 +1,4 @@
-from odinprocserv import (
+from .odinprocserv import (
     OdinProcServConfig,
     OdinProcServControl,
 )

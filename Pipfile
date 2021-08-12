@@ -26,6 +26,7 @@ odinprocservcontrol = {editable = true,path = "."}
 softioc = "*"
 pyyaml = "*"
 aioca = "==1.2"
+pytest-mock = "*"
 
 [scripts]
 tests = "python -m pytest"
