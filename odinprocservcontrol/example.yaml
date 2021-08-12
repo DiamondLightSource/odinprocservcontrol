@@ -1,4 +1,4 @@
-#!/scratch/mef65357/pipenv/odinprocserv-w9fBCsal/bin/odinprocserv
+#!/scratch/mef65357/pipenv/odinprocservcontrol-w9fBCsal/bin/odinprocservcontrol
 
 ioc_name: BLXXY-CS-IOC-01
 prefix: BLXXY-CS-ODN-01

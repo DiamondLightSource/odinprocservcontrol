@@ -15,17 +15,17 @@ import sys
 
 sys.path.insert(0, os.path.abspath(os.path.join(__file__, "..", "..")))
 
-import odinprocserv  # noqa
+import odinprocservcontrol  # noqa
 
 # -- General configuration ------------------------------------------------
 
 # General information about the project.
-project = "odinprocserv"
+project = "odinprocservcontrol"
 copyright = "2021, Diamond Light Source"
 author = "Gary Yendell"
 
 # The full version, including alpha/beta/rc tags.
-release = odinprocserv.__version__
+release = odinprocservcontrol.__version__
 
 # The short X.Y version.
 if "+" in release:

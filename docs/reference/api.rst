@@ -3,24 +3,24 @@
 API
 ===
 
-.. automodule:: odinprocserv
+.. automodule:: odinprocservcontrol
 
-    ``odinprocserv``
+    ``odinprocservcontrol``
     -----------------------------------
 
-This is the internal API reference for odinprocserv
+This is the internal API reference for odinprocservcontrol
 
 You can mix verbose text with docstring and signature extraction by
 using ``autoclass`` and ``autofunction`` directives instead of
 ``automodule`` below.
 
-.. data:: odinprocserv.__version__
+.. data:: odinprocservcontrol.__version__
     :type: str
 
     Version number as calculated by https://github.com/dls-controls/versiongit
 
-.. automodule:: odinprocserv.odinprocserv
+.. automodule:: odinprocservcontrol.odinprocservcontrol
     :members:
 
-    ``odinprocserv.odinprocserv``
+    ``odinprocservcontrol.odinprocservcontrol``
     -----------------------------------------

@@ -22,7 +22,7 @@ sphinx-rtd-theme = "*"
 
 [packages]
 # All other package requirements from setup.cfg
-odinprocserv = {editable = true,path = "."}
+odinprocservcontrol = {editable = true,path = "."}
 softioc = "*"
 pyyaml = "*"
 aioca = "==1.2"

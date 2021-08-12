@@ -1,4 +1,7 @@
-from odinprocserv.odinprocserv import OdinProcServConfig, OdinProcServControl
+from odinprocserv import (
+    OdinProcServConfig,
+    OdinProcServControl,
+)
 
 from ._version_git import __version__
 

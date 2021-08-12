@@ -8,15 +8,15 @@ involves big changes, please file a ticket before making a pull request! We
 want to make sure you don't spend your time coding something that might not fit
 the scope of the project.
 
-.. _dls_controls repository: https://github.com/dls-controls/odinprocserv/issues
+.. _dls_controls repository: https://github.com/dls-controls/odinprocservcontrol/issues
 
 Running the tests
 -----------------
 
 To get the source source code and run the unit tests, run::
 
-    $ git clone git://github.com/dls-controls/odinprocserv.git
-    $ cd odinprocserv
+    $ git clone git://github.com/dls-controls/odinprocservcontrol.git
+    $ cd odinprocservcontrol
     $ pipenv install --dev
     $ pipenv run tests
 

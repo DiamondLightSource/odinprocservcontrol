@@ -5,7 +5,7 @@ from argparse import ArgumentParser
 import yaml
 from softioc import asyncio_dispatcher, builder, softioc
 
-from odinprocserv import OdinProcServConfig, OdinProcServControl
+from odinprocservcontrol import OdinProcServConfig, OdinProcServControl
 
 __all__ = ["main"]
 

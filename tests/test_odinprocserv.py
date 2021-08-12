@@ -1,4 +1,4 @@
-from odinprocserv import cli, hello
+from odinprocservcontrol import cli, hello
 
 
 def test_hello_class_formats_greeting() -> None:
