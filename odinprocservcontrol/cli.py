@@ -73,7 +73,7 @@ def main():
         ioc_name=args.adodin_ioc_name,
         ioc_delay=args.ioc_delay,
     )
-    odin_proc_serv_control = OdinProcServControl(config, args.log_level)
+    OdinProcServControl(config, args.log_level)
 
     dispatcher = asyncio_dispatcher.AsyncioDispatcher()
     builder.LoadDatabase()

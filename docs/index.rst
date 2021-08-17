@@ -30,7 +30,7 @@ Practical step-by-step guides for the more experienced user.
     :caption: How-to Guides
     :hidden:
 
-    how-to/accomplish-a-task
+    how-to/create-an-ioc
 
 .. rst-class:: columns
 
@@ -43,7 +43,7 @@ Explanation of how the library works and why it works that way.
     :caption: Explanations
     :hidden:
 
-    explanations/why-is-something-so
+    explanations/startup-order
 
 .. rst-class:: columns
 

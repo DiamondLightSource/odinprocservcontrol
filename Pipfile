@@ -22,11 +22,10 @@ sphinx-rtd-theme = "*"
 
 [packages]
 # All other package requirements from setup.cfg
-odinprocservcontrol = {editable = true,path = "."}
-softioc = "*"
-pyyaml = "*"
-aioca = "==1.2"
-pytest-mock = "*"
+odinprocservcontrol = {editable = true, path = "."}
+
+[dev-packages]
+odinprocservcontrol = {editable = true, extras = ["dev"], path = "."}
 
 [scripts]
 tests = "python -m pytest"

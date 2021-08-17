@@ -1,10 +1,12 @@
 odinprocservcontrol
-===========================
+===================
 
 |code_ci| |docs_ci| |coverage| |pypi_version| |license|
 
-This is where you should write a short paragraph that describes what your module does,
-how it does it, and why people should use it.
+A pythonSoftIOC to restart Odin procServ processes in a logical way. The IOC provides
+START, STOP and RESTART PVs and pokes the corresponding PVs of the procServControl
+instances for the given Odin processes, in the correct order and with appropriate
+delays.
 
 ============== ==============================================================
 PyPI           ``pip install odinprocservcontrol``
