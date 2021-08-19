@@ -40,7 +40,7 @@ async def test_start_processes_press(
 ) -> None:
     mocker.patch.object(control, "_start_processes", new_callable=AsyncMock)
     await control.start_processes(1)
-    control._start_processes.assert_called_once_with()
+    control._start_processes.assert_awaited_once_with()
     control.start.set.assert_called_once_with(0)
 
 
