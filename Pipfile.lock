@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "5951212fdd4743ba4b3862c3e11af20af871899e66bc2e63e1c8b88cab07b88f"
+            "sha256": "2ff318ff2f8448bc2735d27446bb9a2928eb412b8ee662096ae09ccc23357a10"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -668,7 +668,6 @@
                 "sha256:122fcb64ee37cfad5b3f48d7a7d51875d7031aaf3d8be7c42e2bee25044eee62",
                 "sha256:7d3fbbde18228f4ff2f1f119a45cdffa458b4c0dee32eb4d2bb2f82554bac7bc"
             ],
-            "index": "pypi",
             "version": "==4.0.3"
         },
         "mypy": {
@@ -1063,10 +1062,10 @@
         },
         "types-mock": {
             "hashes": [
-                "sha256:9bdafab236c0530fed36dbf18bc942633b2033bfda16551b2e4eb767341a8b8c",
-                "sha256:e052879bb0a7d78547cce3342ffdf4ec3e8d2eff8f237911c3c8e31ac7ea8c86"
+                "sha256:1a470543be8de673e2ea14739622de3bfb8c9b10429f50338ba9ca1e868c15e9",
+                "sha256:1ad09970f4f5ec45a138ab1e88d032f010e851bccef7765b34737ed390bbc5c8"
             ],
-            "version": "==0.1.3"
+            "version": "==4.0.1"
         },
         "types-pyyaml": {
             "hashes": [
