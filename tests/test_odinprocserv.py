@@ -24,7 +24,7 @@ def control():
 
 
 @pytest.fixture(autouse=True)
-def _patch_builder(mocker):
+def _patch_builder(mocker: MockerFixture):
     mocker.patch.object(builder, "longOut")
 
 
@@ -57,7 +57,7 @@ async def test_stop_processes_press(
 ) -> None:
     with patch.object(control, "_stop_processes") as stop_mock:
         await control.stop_processes(1)
-        stop_mock.assert_called_once_with()
+        stop_mock.assert_awaited_once_with()
         control.stop.set.assert_called_once_with(0)
 
 
@@ -77,7 +77,7 @@ async def test_restart_processes_press(
 ) -> None:
     with patch.object(control, "_restart_processes") as restart_mock:
         await control.restart_processes(1)
-        restart_mock.assert_called_once_with()
+        restart_mock.assert_awaited_once_with()
         control.restart.set.assert_called_once_with(0)
 
 
@@ -159,7 +159,7 @@ async def test__stop_processes(
 
         await control._stop_processes()
 
-        assert expected_call in press_mock.call_args_list
+        assert expected_call == press_mock.await_args
 
 
 @pytest.mark.asyncio
@@ -202,7 +202,7 @@ async def test__press_buttons(
 
         await control._press_buttons(prefixes, suffix)
 
-        caput_mock.assert_called_once_with(["A:START", "B:START"], 1)
+        caput_mock.assert_awaited_once_with(["A:START", "B:START"], 1)
 
 
 def test_format_process_name():
