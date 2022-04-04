@@ -14,22 +14,6 @@ Source code    https://github.com/dls-controls/odinprocservcontrol
 Documentation  https://dls-controls.github.io/odinprocservcontrol
 ============== ==============================================================
 
-This is where you should put some images or code snippets that illustrate
-some relevant examples. If it is a library then you might put some
-introductory code here:
-
-.. code:: python
-
-    from odinprocservcontrol.hello import HelloClass
-
-    hello = HelloClass("me")
-    print(hello.format_greeting())
-
-Or if it is a commandline tool then you might put some example commands here::
-
-    odinprocservcontrol person --times=2
-
-
 .. |code_ci| image:: https://github.com/dls-controls/odinprocservcontrol/workflows/Code%20CI/badge.svg?branch=master
     :target: https://github.com/dls-controls/odinprocservcontrol/actions?query=workflow%3A%22Code+CI%22
     :alt: Code CI
