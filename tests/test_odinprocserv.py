@@ -124,6 +124,23 @@ async def test__start_processes(
         call.press_mock(["BLXXY-EA-ODN-01"], "START"),
         call.sleep_mock(5),
         call.press_mock(["BLXXY-EA-IOC-01"], "START"),
+        call.press_mock(
+            [
+                "BLXXY-EA-ODN-02",
+                "BLXXY-EA-ODN-03",
+                "BLXXY-EA-ODN-04",
+                "BLXXY-EA-ODN-05",
+                "BLXXY-EA-ODN-06",
+                "BLXXY-EA-ODN-07",
+                "BLXXY-EA-ODN-08",
+                "BLXXY-EA-ODN-09",
+                "BLXXY-EA-ODN-10",
+                "BLXXY-EA-ODN-11",
+                "BLXXY-EA-ODN-01",
+                "BLXXY-EA-IOC-01",
+            ],
+            "TOGGLE",
+        ),
     ]
 
     await control._start_processes()

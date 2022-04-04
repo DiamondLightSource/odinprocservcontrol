@@ -93,6 +93,13 @@ class OdinProcServControl:
         await self._press_buttons([self.config.ioc_name], "START")
         self._logger.info("Started ADOdin IOC")
 
+        # Stop will have toggled autorestart off - toggle it back on
+        await self._press_buttons(
+            self.data_process_names
+            + [self.config.server_process_name, self.config.ioc_name],
+            "TOGGLE",
+        )
+
         self._logger.debug("Restart complete")
 
     async def stop_processes(self, value: int) -> None:
