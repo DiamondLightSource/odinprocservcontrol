@@ -34,7 +34,7 @@ jobs:
       - name: Install Python Dependencies
         run: |
           pip install pipenv twine build
-          pipenv install --dev --deploy --python $(python -c 'import sys; print(sys.executable)') && pipenv graph
+          pipenv install --dev --ignore-pipfile --deploy --python $(python -c 'import sys; print(sys.executable)') && pipenv graph
 
       - name: Create Sdist and Wheel
         if: matrix.publish
