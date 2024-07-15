@@ -13,7 +13,7 @@ This is the internal API reference for odinprocservcontrol
 .. data:: odinprocservcontrol.__version__
     :type: str
 
-    Version number as calculated by https://github.com/dls-controls/versiongit
+    Version number as calculated by https://github.com/DiamondLightSource/versiongit
 
 .. automodule:: odinprocservcontrol.odinprocserv
     :members:
